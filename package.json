@@ -1,0 +1,21 @@
+{
+  "name": "api-sample",
+  "version": "1.0.0",
+  "description": "backend sample",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/test.js",
+    "sample": "nodemon src/sample.js"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "jorge encinas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
