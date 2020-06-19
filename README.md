@@ -19,5 +19,5 @@ A minimal example, api for NodeJS using ES6+.
 
 ```
 GET http://localhost:9090/hello
-GET http://localhost:3000//info/:id // gets object from array example with id ":id"
+GET http://localhost:3000/info/:id // gets object from array example with id ":id"
 ```
