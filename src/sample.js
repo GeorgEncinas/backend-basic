@@ -16,7 +16,7 @@ sample.get('/hello', function (req, res) {
     })
 })
 
-sample.get('/info/?id', function (req, res) {
+sample.get('/info/:id', function (req, res) {
     const sub_id = req.query.subId
     const echo = req.query.echo
     const echo2 = req.query.echo2
@@ -31,6 +31,12 @@ sample.get('/info/?id', function (req, res) {
         echo2,
         echo3
     })
+})
+
+sample.post('/array/:id', function (req, res) {
+    console.dir(req.body, {colors: true})
+    array[req.params.id] = req.body
+    res.status(200).json(array)
 })
 
 const PORT = 9090
