@@ -15,7 +15,10 @@
   "author": "jorge encinas",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.9.19",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.13"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

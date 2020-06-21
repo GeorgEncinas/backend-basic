@@ -1,4 +1,5 @@
 import express from 'express'
+import { userRoute } from "./routes/user";
 
 const sample = express()
 
@@ -55,3 +56,7 @@ const PORT = 9090
 sample.listen(PORT, () => {
     console.log('listen at http://localhost:' + PORT)
 })
+
+
+// routes
+sample.use('/user', userRoute)
