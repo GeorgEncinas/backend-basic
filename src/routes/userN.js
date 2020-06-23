@@ -1,14 +1,14 @@
 // http://localhost:9090/user*****
 
 import { Router } from "express";
-import { User } from "../models";
+import { User as UserN } from "../models";
 
-const userRoute = Router()
+const userRouteN = Router()
 
-userRoute.get('/:id', async (req, res) => {
+userRouteN.get('/:id', async (req, res) => {
     const { id } = req.query
     try {
-        const userFound = await User.findOne( {id} )
+        const userFound = await UserN.findOne({ _id: id })
         if (userFound)
             res.status(200).json(userFound)
         else
@@ -19,9 +19,9 @@ userRoute.get('/:id', async (req, res) => {
     }
 })
 
-userRoute.post('/', async (req, res) => {
+userRouteN.post('/', async (req, res) => {
     try {
-        const userCreated = await User.create(req.body)
+        const userCreated = await UserN.create(req.body)
         if (userCreated) {
             res.status(201).json(userCreated)
         }
@@ -31,10 +31,10 @@ userRoute.post('/', async (req, res) => {
     }
 })
 
-userRoute.put('/:id', async (req, res) => {
+userRouteN.put('/:id', async (req, res) => {
     const { id } = req.query
     try {
-        const userFound = await User.findByPk(id)
+        const userFound = await UserN.findOne({ _id: id })
         if (userFound) {
             const userDeleted = await userFound.destroy()
             res.status(200).json(userDeleted)
@@ -46,10 +46,10 @@ userRoute.put('/:id', async (req, res) => {
     }
 })
 
-userRoute.patch('/:id', async (req, res) => {
+userRouteN.patch('/:id', async (req, res) => {
     const { id } = req.query
     try {
-        const userFound = await User.findByPk(id)
+        const userFound = await UserN.findOne({ _id: id })
         if (userFound) {
             const userUpdated = await userFound.update(req.body)
             res.status(200).json(userUpdated)
@@ -61,4 +61,4 @@ userRoute.patch('/:id', async (req, res) => {
     }
 })
 
-export { userRoute }
+export { userRouteN as userRoute }
