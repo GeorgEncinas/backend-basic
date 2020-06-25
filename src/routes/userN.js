@@ -6,7 +6,7 @@ import { User as UserN } from "../models";
 const userRouteN = Router()
 
 userRouteN.get('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
         const userFound = await UserN.findOne({ _id: id })
         if (userFound)
@@ -32,7 +32,7 @@ userRouteN.post('/', async (req, res) => {
 })
 
 userRouteN.put('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
         const userFound = await UserN.findOne({ _id: id })
         if (userFound) {
@@ -47,7 +47,7 @@ userRouteN.put('/:id', async (req, res) => {
 })
 
 userRouteN.patch('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
         const userFound = await UserN.findOne({ _id: id })
         if (userFound) {

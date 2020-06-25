@@ -6,9 +6,9 @@ import { User } from "../models";
 const userRoute = Router()
 
 userRoute.get('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
-        const userFound = await User.findOne( {id} )
+        const userFound = await User.findByPk(id)
         if (userFound)
             res.status(200).json(userFound)
         else
@@ -27,12 +27,15 @@ userRoute.post('/', async (req, res) => {
         }
     } catch (err) {
         console.warn(err)
+        if (err.errno === 1062)
+            res.status(405).json(err)
+        else
         res.status(500).json(err)
     }
 })
 
 userRoute.put('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
         const userFound = await User.findByPk(id)
         if (userFound) {
@@ -47,7 +50,7 @@ userRoute.put('/:id', async (req, res) => {
 })
 
 userRoute.patch('/:id', async (req, res) => {
-    const { id } = req.query
+    const { id } = req.params
     try {
         const userFound = await User.findByPk(id)
         if (userFound) {

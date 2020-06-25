@@ -20,7 +20,7 @@ const syncDB = async () => {
         await db.authenticate()
         console.log('DB connection: test ok')
 
-        await db.sync()
+        await db.sync({ alter: true }) // !!warning exist { alter: true } !! warning exist { alter: true }
         console.log('DB connection: sync ok')
     } catch (e) {
         console.error(e)

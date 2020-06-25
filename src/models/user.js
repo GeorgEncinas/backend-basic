@@ -9,13 +9,18 @@ const fields = {
         type: DataTypes.STRING(20)
     },
     ci: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING(20)
     },
     email: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        unique: true,
+        validate: { isEmail: true },            // checks for email format (foo@bar.com)
     },
 }
 
