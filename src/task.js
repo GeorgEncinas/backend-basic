@@ -6,3 +6,9 @@
 // - HasOne: https://sequelize.org/v5/class/lib/associations/has-one.js~HasOne.html
 // mongoose
 // sequelize
+
+
+// implementar control por ci en el post o registro de usuario
+// implementar un manejo de erro en el post de usuarios
+
+// Sus tareas en una rama aparte y hagan un pull request
