@@ -1,26 +1,33 @@
 // http://localhost:9090/user*****
 
 import { Router } from "express";
-import { User as UserN } from "../models";
+import { UserN } from "../models";
+import { hash } from "../services/hashPasswords";
 
 const userRouteN = Router()
 
 userRouteN.get('/:id', async (req, res) => {
     const { id } = req.params
     try {
-        const userFound = await UserN.findOne({ _id: id })
+        const userFound = await UserN.findById(id)
         if (userFound)
             res.status(200).json(userFound)
         else
             res.status(404).json({ msg: 'User not found' })
     } catch (err) {
         console.warn(err)
-        res.status(500).json(err)
+        if (err.error.Symbol("mongoose: validatorError"))
+            res.status(405).json(err)
+        else 
+            res.status(500).json(err)
     }
 })
 
 userRouteN.post('/', async (req, res) => {
     try {
+        if (req.body?.password)
+            req.body.password = hash(req.body.password)
+        
         const userCreated = await UserN.create(req.body)
         if (userCreated) {
             res.status(201).json(userCreated)
@@ -34,7 +41,7 @@ userRouteN.post('/', async (req, res) => {
 userRouteN.put('/:id', async (req, res) => {
     const { id } = req.params
     try {
-        const userFound = await UserN.findOne({ _id: id })
+        const userFound = await UserN.findById(id)
         if (userFound) {
             const userDeleted = await userFound.destroy()
             res.status(200).json(userDeleted)
@@ -49,7 +56,7 @@ userRouteN.put('/:id', async (req, res) => {
 userRouteN.patch('/:id', async (req, res) => {
     const { id } = req.params
     try {
-        const userFound = await UserN.findOne({ _id: id })
+        const userFound = await UserN.findById(id)
         if (userFound) {
             const userUpdated = await userFound.update(req.body)
             res.status(200).json(userUpdated)
@@ -61,4 +68,4 @@ userRouteN.patch('/:id', async (req, res) => {
     }
 })
 
-export { userRouteN as userRoute }
+export { userRouteN }

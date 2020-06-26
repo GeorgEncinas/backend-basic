@@ -4,7 +4,21 @@ export default model('User', new Schema({
     // _id: { }
     name: String, // String is shorthand for {type: String}
     surname: String,
-    ci: String,
+    ci: {
+        type: Number,
+        unique: true,
+        required: true
+    },
     password: String,
-    email: String
+    email: {
+        type: String,
+        unique: true,
+        validate: {
+            validator: function (v) {
+                return /^\w+@[a-zA-Z_.]+?\.[a-zA-Z]{2,3}$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email!`
+        },
+        required: true
+    }
 }))

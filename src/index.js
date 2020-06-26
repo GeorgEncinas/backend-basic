@@ -1,5 +1,6 @@
 import express from 'express'
 import { userRoute } from "./routes/user";
+import { userRouteN } from "./routes/userN";
 
 const sample = express()
 
@@ -60,3 +61,4 @@ sample.listen(PORT, () => {
 
 // routes
 sample.use('/user', userRoute)
+sample.use('/userN', userRouteN)
