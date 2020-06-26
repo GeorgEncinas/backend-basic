@@ -2,10 +2,11 @@
 
 import { Router } from "express";
 import { User } from "../models";
+import { hash } from "../services/hashPasswords";
 
 const userRoute = Router()
 
-userRoute.get('/:id', async (req, res) => {
+userRoute.get('/:id', async(req, res) => {
     const { id } = req.params
     try {
         const userFound = await User.findByPk(id)
@@ -19,8 +20,11 @@ userRoute.get('/:id', async (req, res) => {
     }
 })
 
-userRoute.post('/', async (req, res) => {
+userRoute.post('/', async(req, res) => {
     try {
+        if (req.body?.password)
+            req.body.password = hash(req.body.password)
+
         const userCreated = await User.create(req.body)
         if (userCreated) {
             res.status(201).json(userCreated)
@@ -30,11 +34,13 @@ userRoute.post('/', async (req, res) => {
         if (err.errno === 1062)
             res.status(405).json(err)
         else
-        res.status(500).json(err)
+            console.log(err.message);
+            console.log(err.errno);
+            res.status(500).json(err)
     }
 })
 
-userRoute.put('/:id', async (req, res) => {
+userRoute.put('/:id', async(req, res) => {
     const { id } = req.params
     try {
         const userFound = await User.findByPk(id)
@@ -49,7 +55,7 @@ userRoute.put('/:id', async (req, res) => {
     }
 })
 
-userRoute.patch('/:id', async (req, res) => {
+userRoute.patch('/:id', async(req, res) => {
     const { id } = req.params
     try {
         const userFound = await User.findByPk(id)

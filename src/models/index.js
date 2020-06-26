@@ -5,18 +5,18 @@ import mongoose from 'mongoose'
 
 import { connection } from 'mongoose';
 
-const db = new Sequelize('sample', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql'
-})
-// 'mysql://localhost:33306/sample'
-// in mysql, create dabase sample with: create schema sample;
+const db = new Sequelize('sample', 'root', '', {
+        host: 'localhost',
+        dialect: 'mysql'
+    })
+    // 'mysql://localhost:33306/sample'
+    // in mysql, create dabase sample with: create schema sample;
 
 const User = UserModel('User', db)
 
 export { User, UserN }
 
-const syncDB = async () => {
+const syncDB = async() => {
     try {
         await db.authenticate()
         console.log('DB connection: test ok')

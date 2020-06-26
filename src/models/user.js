@@ -4,6 +4,13 @@ const fields = {
     name: {
         type: DataTypes.STRING(20),
         // field: 'name' or custom field name
+        validate:{
+            istooLong(value) {
+                if (value.length > 20) {
+                throw new Error('Is too long');
+                }
+            }
+        }
     },
     surname: {
         type: DataTypes.STRING(20)
@@ -11,16 +18,18 @@ const fields = {
     ci: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: { min: 100, max: 99999999 }
     },
     password: {
-        type: DataTypes.STRING(20)
+        type: DataTypes.STRING(64),
+        allowNull: false,
     },
     email: {
         type: DataTypes.STRING(50),
         allowNull: false,
         unique: true,
-        validate: { isEmail: true },            // checks for email format (foo@bar.com)
+        validate: { isEmail: true }, // checks for email format (foo@bar.com)
     },
 }
 

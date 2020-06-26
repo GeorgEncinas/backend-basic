@@ -9,12 +9,15 @@ export default model('User', new Schema({
         unique: true,
         required: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         unique: true,
         validate: {
-            validator: function (v) {
+            validator: function(v) {
                 return /^\w+@[a-zA-Z_.]+?\.[a-zA-Z]{2,3}$/.test(v);
             },
             message: props => `${props.value} is not a valid email!`
