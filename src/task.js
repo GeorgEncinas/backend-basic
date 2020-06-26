@@ -7,8 +7,9 @@
 // mongoose
 // sequelize
 
-
 // implementar control por ci en el post o registro de usuario
 // implementar un manejo de erro en el post de usuarios
+
+// implementar validador de password en mongoose y sequelize
 
 // Sus tareas en una rama aparte y hagan un pull request
