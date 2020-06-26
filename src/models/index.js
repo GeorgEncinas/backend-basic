@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize'
 import UserModel from "./user";
 import UserN from "./noSQL/user";
+import mongoose from 'mongoose'
 
 import { connection } from 'mongoose';
 
@@ -27,5 +28,9 @@ const syncDB = async () => {
     }
 
 }
+
+mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+const dbN = mongoose.connection;
+dbN.on('error', console.error.bind(console, 'connection error:'));
 
 syncDB()
