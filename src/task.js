@@ -12,4 +12,6 @@
 
 // implementar validador de password en mongoose y sequelize
 
+// investigar environments
+
 // Sus tareas en una rama aparte y hagan un pull request
