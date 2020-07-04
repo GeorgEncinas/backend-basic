@@ -14,17 +14,7 @@ const sign = async (payload) => {
 }
 
 const verify = async (token) => {
-    // let decoded
-    // try {
-    // decoded = jwt.verify(token, SECRET)
     return jwt.verify(token, SECRET)
-    // } catch (err) {
-    //     decoded = err
-    //     console.warn('Token Service:', err)
-    //     new Error(err)
-    // }
-
-    // return decoded
 }
 
 const decode = (token) => {
