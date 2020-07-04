@@ -32,6 +32,26 @@ sample.get('/hello', (req, res) => {
     })
 })
 
+const login = {
+    user: 'test',
+    password: '1234'
+}
+
+sample.post('/info/login', async (req, res) => {
+    try {
+        if (
+            login.user === req.body.user &&
+            login.password === req.body.password
+        )
+            res.status(200).send(await sign(req.body))
+        else
+            res.status(403).json({ msg: 'Invalid username or password' })
+    } catch (e) {
+        console.error(e)
+        res.status(409).json({ msg: 'Error in sing', e })
+    }
+})
+
 
 sample.get('/info/:id', async (req, res, next) => {
     const token = req.get('X-Token')
